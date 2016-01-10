@@ -1,0 +1,80 @@
+<!doctype html>
+
+<html ng-app="activitiesManager">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Lista de Contatos</title>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #lista-contatos         { margin-bottom:30px; }
+        form button             { margin-top: 25px; }
+        form .form-group:first-child { padding-left: 0; }
+    </style>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="angularApp.js"></script>
+
+</head>
+<body ng-controller="mainController">
+    <div class="container">
+
+        <div class="jumbotron text-center">
+            <h1>Activities List <span class="label label-info">{{ activities.length }}</span></h1>
+        </div>
+
+        <div id="list-activities">
+            <table class="table table-striped">
+
+                <tr>
+                    <th>Summary</th>
+                    <th>Description</th>
+                    <th>Time</th>
+                    <th>Options</th>
+                </tr>
+
+                <tr ng-repeat="activity in activities">
+                    <td>{{ activity.summary }}</td>
+                    <td>{{ activity.description }}</td>
+                    <td>{{ activity.time }}</td>
+                    <td>
+                        <button type="button" class="btn btn-default" ng-click="editActivity(activity._id)">Edit</button>
+                        <button type="button" class="btn btn-primary" ng-click="deleteActivity(activity._id)">Remove</button>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div id="activity-form">
+            <hr>
+            <form>
+                <div class="form-group col-md-3">
+                    <label for="nomeContato">Summary</label>
+                    <input type="text" class="form-control" id="summaryActivity" placeholder="Write an email to a friend" ng-model="formActivity.summary">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="emailContato">Description</label>
+                    <input type="text" class="form-control" id="descriptionActivity" placeholder="Write an email to a friend inviting him to your party" ng-model="formActivity.description">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="telefoneContato">Telefone</label>
+                    <input type="text" class="form-control" id="timeActivity" placeholder="1" ng-model="formActivity.time">
+                </div>
+                <div class="form-group col-md-3">
+                    <button type="submit" class="btn btn-primary" ng-click="createActivity()">Create</button>
+                    <button type="submit" class="btn btn-info" ng-click="updateActivity()">Update</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>
